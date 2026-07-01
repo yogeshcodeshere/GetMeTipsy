@@ -1,0 +1,49 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+  <g stroke="#C2185B" strokeWidth="16" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- Left Glass -->
+    <path d="M120 120 L220 135 L200 250 C190 300 160 325 130 335" />
+    <path d="M130 335 L130 420" />
+    <path d="M90 440 H170" />
+
+    <!-- Right Glass -->
+    <path d="M392 120 L292 135 L312 250 C322 300 352 325 382 335" />
+    <path d="M382 335 L382 420" />
+    <path d="M342 440 H422" />
+
+    <!-- Wine Levels -->
+    <path d="M138 185 Q170 175 202 185" />
+    <path d="M310 185 Q342 175 374 185" />
+
+    <!-- Clink Spark -->
+    <path d="M248 90 V55" />
+    <path d="M215 105 L190 75" />
+    <path d="M281 105 L306 75" />
+
+  </g>
+
+  <!-- Dollar -->
+  <text
+    x="165"
+    y="260"
+    text-anchor="middle"
+    font-size="70"
+    font-family="Arial, sans-serif"
+    fill="#C2185B"
+    font-weight="bold"
+  >
+    $
+  </text>
+
+  <!-- Heart -->
+  <path
+    d="M355 245
+       C355 220 390 220 390 245
+       C390 220 425 220 425 245
+       C425 275 390 295 390 295
+       C390 295 355 275 355 245Z"
+    fill="#C2185B"
+  />
+
+</svg>
