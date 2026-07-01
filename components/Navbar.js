@@ -83,10 +83,12 @@ const Navbar = () => {
     return (
         <nav className='top-0 fixed z-50 w-full border-b border-[#760940]/25 bg-black text-white px-10'>
             <div className='flex justify-around items-center py-4.5'>
+                <Link href="/">
                 <div className="logo text-2xl font-bold text-white/80">
                     GetMe
                     <span className='text-[#762045]'>Tipsy</span>
                 </div>
+                </Link>
                 <ul className='flex gap-10 text-[#ffffff6f]'>
                     <Link href={"/"}><li className="hover:text-[#ffffffb4] cursor-pointer transition-all">Home</li></Link>
                     <li className="hover:text-[#ffffffb4] cursor-pointer transition-all">About</li>

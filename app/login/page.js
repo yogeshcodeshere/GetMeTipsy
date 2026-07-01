@@ -1,18 +1,20 @@
 "use client"
 import { useSession, signIn, signOut } from "next-auth/react"
-import React from 'react'
+import {React, useEffect} from 'react'
 import {useRouter} from "next/navigation"
 
 
 
 const page = () => {
-    const { data: session } = useSession()
+    const router = useRouter();
+    const { data: session } = useSession();
 
-    if(session){
-        const router = useRouter()
-        router.push("/dashboard")
-
-    }
+    useEffect(() => {
+      if (session){
+        router.push("/dashboard");
+      }
+    }, [session, router]);
+    
     return (
         <>
             <div className='py-20'>
@@ -77,6 +79,7 @@ const page = () => {
 
                         <button
                             onClick = {() => {
+                            console.log("signing in with github")
                             signIn("github") 
                             }}
                             className="flex items-center bg-black border border-white/30 rounded-lg shadow-md max-w-xs pr-15 pl-5 py-3  text-sm font-medium text-white/80 hover:bg-gray-800 transition-all cursor-pointer">
