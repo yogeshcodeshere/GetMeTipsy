@@ -1,41 +1,57 @@
 "use client"
 import { useSession, signIn, signOut } from "next-auth/react"
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from "next/image"
+import { fetchuser } from '@/actions/useractions'
 
 const Navbar = () => {
 
     const { data: session } = useSession()
     console.log(session)
     const [showdrop, setShowdrop] = useState(false)
+    const [currentuser, setCurrentuser] = useState(null)
+
+    useEffect(() => {
+        if (session?.user?.name) {
+            getUser()
+        }
+    }, [session])
+
+    const getUser = async () => {
+        const u = await fetchuser(session.user.name)
+        setCurrentuser(u)
+    }
+
 
     if (session) {
         return <>
             <div className="flex justify-between items-center top-0 fixed z-50 w-full border-b border-[#760940]/25 bg-black text-white px-20 py-3 ">
                 <Link href="/">
-                <div className="logo text-2xl font-bold text-white/80">
-                    GetMe
-                    <span className='text-[#762045]'>Tipsy</span>
-                </div>
+                    <div className="logo text-2xl font-bold text-white/80">
+                        GetMe
+                        <span className='text-[#762045]'>Tipsy</span>
+                    </div>
                 </Link>
 
                 <div className="flex gap-1 justify-center align-center">
 
                     <div className="flex items-center gap-3">
-                        
+
 
                         <button onClick={() => {
                             setShowdrop(!showdrop)
                         }}
                             id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" className="transition-all rounded-lg inline-flex items-center justify-center text-white box-border border border-transparent hover:bg-brand-strong shadow-xs font-medium leading-5 rounded-base text-sm px-2 py-2.5 hover:bg-[#302f2f6f] cursor-pointer gap-2 " type="button">
-                            <Image
-                            src={session.user.image}
-                            width={30}
-                            height={30}
-                            alt="Profile"
-                            className="rounded-full ring-2 ring-[#762045]/60 hover:ring-[#762045] transition"
-                        />
+                            <div className="w-[30px] h-[30px] rounded-full overflow-hidden shrink-0 ring-[#760940] ring-3">
+                                <img
+                                    src={currentuser?.profilepic || session.user.image}
+                                    width={30}
+                                    height={30}
+                                    alt="Profile"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
                             <span className="text-white/80 text-md font-semibold">
                                 {session.user.name}
                             </span>
@@ -84,10 +100,10 @@ const Navbar = () => {
         <nav className='top-0 fixed z-50 w-full border-b border-[#760940]/25 bg-black text-white px-10'>
             <div className='flex justify-around items-center py-4.5'>
                 <Link href="/">
-                <div className="logo text-2xl font-bold text-white/80">
-                    GetMe
-                    <span className='text-[#762045]'>Tipsy</span>
-                </div>
+                    <div className="logo text-2xl font-bold text-white/80">
+                        GetMe
+                        <span className='text-[#762045]'>Tipsy</span>
+                    </div>
                 </Link>
                 <ul className='flex gap-10 text-[#ffffff6f]'>
                     <Link href={"/"}><li className="hover:text-[#ffffffb4] cursor-pointer transition-all">Home</li></Link>

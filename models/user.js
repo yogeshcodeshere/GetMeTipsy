@@ -8,6 +8,10 @@ const UserSchema = new Schema({
     username: {type: String, required: true, unique: true},
     profilepic: {type: String},
     coverpic: {type: String},
+    createdAt: {type: Date, default: Date.now},
+    updatedAt: {type: Date, default: Date.now},
+    razorkey: {type: String},
+    rs: {type: String},
 
 
 })
