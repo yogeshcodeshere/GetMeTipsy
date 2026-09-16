@@ -17,16 +17,17 @@ const page = () => {
     
     return (
         <>
-            <div className='py-20'>
+            <div className='py-16 sm:py-24 px-4'>
 
-                <div className="container text-white items-center justify-center flex flex-col min-w-screen">
-                    <h1 className='text-center text-5xl font-semibold'>Welcome to the <span className='text-[#762045] font-bold'>Tipsy</span> Family</h1>
-                    <div className="flex flex-col gap-3 min-h-screen py-15">
+                <div className="w-full max-w-md mx-auto text-white items-center justify-center flex flex-col">
+                    <h1 className='text-center text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight'>Welcome to the <span className='text-[#ff4081] font-bold'>Tipsy</span> Family</h1>
+                    <div className="flex flex-col gap-3 w-full max-w-xs py-8 sm:py-12">
 
 
                         <button
                             onClick={() => signIn("google")}
-                            className="flex items-center bg-black border border-white/30 rounded-lg shadow-md max-w-xs pr-15 pl-5 py-3  text-sm font-medium text-white/80 hover:bg-gray-800 transition-all cursor-pointer">
+                            className="flex items-center justify-start bg-black border border-white/30 rounded-lg shadow-md w-full px-5 py-3 text-sm font-medium text-white/80 hover:bg-gray-800 transition-all cursor-pointer">
+
                             <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
 
                                 viewBox="-0.5 0 48 48" version="1.1">
@@ -55,7 +56,7 @@ const page = () => {
 
 
                         <button
-                            className="flex items-center bg-black border border-white/30 rounded-lg shadow-md max-w-xs pr-15 pl-5 py-3 text-sm font-medium text-white/80 hover:bg-gray-800 transition-all cursor-pointer">
+                            className="flex items-center justify-start bg-black border border-white/30 rounded-lg shadow-md w-full px-5 py-3 text-sm font-medium text-white/80 hover:bg-gray-800 transition-all cursor-pointer">
                             <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
                                 viewBox="0 -2 44 44" version="1.1">
                                 <g id="Icons" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -72,8 +73,8 @@ const page = () => {
 
 
                         <button
-                            className="flex items-center bg-black border border-white/30 rounded-lg shadow-md max-w-xs pr-15 pl-5 py-3  text-sm font-medium text-white/80 hover:bg-gray-800 transition-all cursor-pointer">
-                            <svg viewBox="0 0 24 24" fill="#0062e1" className="h-6 w-6 mr-2 x1lliihq x2lah0s x1k90msu x2h7rmj x1qfuztq x1fey0fg xy75621 xni59qk"><path d="M22 12.037C22 6.494 17.523 2 12 2S2 6.494 2 12.037c0 4.707 3.229 8.656 7.584 9.741v-6.674H7.522v-3.067h2.062v-1.322c0-3.416 1.54-5 4.882-5 .634 0 1.727.125 2.174.25v2.78a12.807 12.807 0 0 0-1.155-.037c-1.64 0-2.273.623-2.273 2.244v1.085h3.266l-.56 3.067h-2.706V22C18.164 21.4 22 17.168 22 12.037z"></path></svg>
+                            className="flex items-center justify-start bg-black border border-white/30 rounded-lg shadow-md w-full px-5 py-3 text-sm font-medium text-white/80 hover:bg-gray-800 transition-all cursor-pointer">
+                            <svg viewBox="0 0 24 24" fill="#0062e1" className="h-6 w-6 mr-2 shrink-0"><path d="M22 12.037C22 6.494 17.523 2 12 2S2 6.494 2 12.037c0 4.707 3.229 8.656 7.584 9.741v-6.674H7.522v-3.067h2.062v-1.322c0-3.416 1.54-5 4.882-5 .634 0 1.727.125 2.174.25v2.78a12.807 12.807 0 0 0-1.155-.037c-1.64 0-2.273.623-2.273 2.244v1.085h3.266l-.56 3.067h-2.706V22C18.164 21.4 22 17.168 22 12.037z"></path></svg>
 
                             <span>Continue with Facebook</span>
                         </button>
@@ -84,8 +85,8 @@ const page = () => {
                             console.log("signing in with github")
                             signIn("github") 
                             }}
-                            className="flex items-center bg-black border border-white/30 rounded-lg shadow-md max-w-xs pr-15 pl-5 py-3  text-sm font-medium text-white/80 hover:bg-gray-800 transition-all cursor-pointer">
-                            <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
+                            className="flex items-center justify-start bg-black border border-white/30 rounded-lg shadow-md w-full px-5 py-3 text-sm font-medium text-white/80 hover:bg-gray-800 transition-all cursor-pointer">
+                            <svg className="h-6 w-6 mr-2 shrink-0" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
                                 viewBox="0 0 73 73" version="1.1">
                                 <g id="team-collaboration/version-control/github" stroke="none" strokeWidth="1" fill="none"
                                     fillRule="evenodd">
@@ -108,8 +109,8 @@ const page = () => {
 
 
                         <button
-                            className="flex items-center bg-black border border-white/30 rounded-lg shadow-md max-w-xs pr-15 pl-5 py-3  text-sm font-medium text-white/80 hover:bg-gray-800 transition-all cursor-pointer">
-                            <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
+                            className="flex items-center justify-start bg-black border border-white/30 rounded-lg shadow-md w-full px-5 py-3 text-sm font-medium text-white/80 hover:bg-gray-800 transition-all cursor-pointer">
+                            <svg className="h-6 w-6 mr-2 shrink-0" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
                                 viewBox="-1.5 0 20 20" version="1.1">
                                 <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                                     <g id="Dribbble-Light-Preview" transform="translate(-102.000000, -7439.000000)" fill="#ffffff">

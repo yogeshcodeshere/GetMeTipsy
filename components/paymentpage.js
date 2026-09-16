@@ -86,11 +86,11 @@ const PaymentPage = ({ username, paymentdone }) => {
         <>
             <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
 
-            <div className="min-h-screen">
+            <div className="min-h-screen pb-16">
 
                 <div className="banner w-full relative">
-                    <img className="opacity-70 object-cover w-full h-90 border-b border-white/40" src={currentuser?.coverpic || "/default-cover.svg"} alt="" />
-                    <div className="absolute top-70 left-1/2 -translate-x-1/2 w-[150px] h-[150px] rounded-full overflow-hidden border-4 border-white">
+                    <img className="opacity-70 object-cover w-full h-52 sm:h-72 md:h-80 lg:h-90 border-b border-white/40" src={currentuser?.coverpic || "/default-cover.svg"} alt="" />
+                    <div className="absolute top-36 sm:top-52 md:top-60 lg:top-70 left-1/2 -translate-x-1/2 w-[110px] h-[110px] sm:w-[130px] sm:h-[130px] md:w-[150px] md:h-[150px] rounded-full overflow-hidden border-4 border-white shadow-xl">
                         <img
                             src={currentuser?.profilepic || "/default-avatar.svg"}
                             alt="Profile"
@@ -98,11 +98,11 @@ const PaymentPage = ({ username, paymentdone }) => {
                         />
                     </div>
                 </div>
-                <div className="text-white text-3xl font-bold flex flex-col gap-4 justify-center items-center my-25">
+                <div className="text-white text-2xl sm:text-3xl font-bold flex flex-col gap-4 justify-center items-center mt-20 sm:mt-24 md:mt-28 mb-12 sm:mb-16 px-4">
                     @{username}
-                    <p className="text-sm text-white/90 font-normal w-68 text-center">creating vibe coded websites that dont look vibe coded and serves an actual purpose</p>
-                    <div className="flex gap-2 text-sm text-white/50 font-semibold">
-                        <ul className="flex list-disc gap-8">
+                    <p className="text-sm text-white/90 font-normal max-w-md text-center">creating vibe coded websites that dont look vibe coded and serves an actual purpose</p>
+                    <div className="flex gap-2 text-xs sm:text-sm text-white/50 font-semibold">
+                        <ul className="flex list-disc gap-4 sm:gap-8 flex-wrap justify-center">
                             <li className="list-none">3500 members</li>
                             <li>111 posts</li>
                             <li>₹1100/release</li>
@@ -112,59 +112,58 @@ const PaymentPage = ({ username, paymentdone }) => {
 
                 </div>
 
-                <div className="chat flex gap-10 justify-center items-center mb-10">
-                    <div className="supporters w-[40vw] h-[70vh] bg-[#1f1f1f99] rounded-2xl flex flex-col text-justify gap-15 items-center">
-                        <p className="font-bold text-2xl text-center mt-7 text-[#760940] p-3">Supporters</p>
-                        <ul className="flex flex-col gap-2 text-white text-md">
-                            {payments.length === 0 && <p className="text-white/50 text-sm text-center">No supporters yet</p>}
+                <div className="chat flex flex-col lg:flex-row gap-8 lg:gap-10 justify-center items-stretch lg:items-start px-4 sm:px-6 md:px-8 max-w-6xl mx-auto mb-10">
+                    <div className="supporters w-full lg:w-1/2 min-h-[380px] lg:h-[70vh] bg-[#1f1f1f99] rounded-2xl flex flex-col text-justify p-4 sm:p-6 items-center">
+                        <p className="font-bold text-xl sm:text-2xl text-center text-[#760940] pb-3">Supporters</p>
+                        <ul className="flex flex-col gap-3 text-white text-sm sm:text-md w-full overflow-y-auto max-h-[50vh] px-2">
+                            {payments.length === 0 && <p className="text-white/50 text-sm text-center py-8">No supporters yet</p>}
                             {payments.map((p, i) => {
-                                return <li className="flex items-center gap-2 "> <span><lord-icon
+                                return <li key={i} className="flex items-center gap-2 bg-white/5 p-2 rounded-lg"> <span><lord-icon
                                     src="https://cdn.lordicon.com/hhljfoaj.json"
                                     trigger="loop"
                                     delay="2000"
                                     colors="primary:#121331,secondary:#762045,tertiary:#faefd1"
-                                    style={{ width: "30px", height: "30px" }}>
+                                    style={{ width: "26px", height: "26px" }}>
                                 </lord-icon></span> <span>
                                         {p.name} donated ₹{Number.parseInt(p.amount / 100)} with a message{" "}
-                                        <span className="font-bold">{p.message}</span>
+                                        <span className="font-bold">&ldquo;{p.message}&rdquo;</span>
                                     </span></li>
                             })}
 
                         </ul>
                     </div>
-                    <div className="payment w-[40vw] h-[70vh] bg-[#1f1f1f99] rounded-2xl ">
-                        <p className="flex gap-2 justify-center font-bold text-2xl text-center mt-9.5 text-[#ffffff]">Support  <span className="text-[#760940]"> @{username}</span></p>
-                        <div className="flex flex-col gap-4 justify-center mt-6.5 items-center">
+                    <div className="payment w-full lg:w-1/2 min-h-[420px] lg:h-[70vh] bg-[#1f1f1f99] rounded-2xl p-4 sm:p-6 flex flex-col justify-center">
+                        <p className="flex gap-2 justify-center font-bold text-xl sm:text-2xl text-center text-white">Support <span className="text-[#760940]"> @{username}</span></p>
+                        <div className="flex flex-col gap-4 justify-center mt-6 items-center w-full max-w-md mx-auto">
 
-                            <div className="flex flex-col gap-4 justify-center items-center mt-10">
-                                <input onChange={handleChange} name='name' value={paymentform.name} type="text" placeholder="Enter Name" className="bg-[#1f1f1f] border border-[#2e2d2e] rounded-lg w-full px-3 py-2 text-white/70 focus:outline-none " />
-                                <input onChange={handleChange} name='message' value={paymentform.message} type="text" placeholder="Enter Message" className="bg-[#1f1f1f] border border-[#2e2d2e] rounded-lg w-full px-3 py-2 text-white/70 focus:outline-none " />
-                                <input onChange={handleChange} name='amount' value={paymentform.amount} type="text" placeholder="Enter Amount" className="bg-[#1f1f1f] border border-[#2e2d2e] rounded-lg w-full px-3 py-2 text-white/70 focus:outline-none " />
+                            <div className="flex flex-col gap-3 justify-center items-center w-full">
+                                <input onChange={handleChange} name='name' value={paymentform.name} type="text" placeholder="Enter Name" className="bg-[#1f1f1f] border border-[#2e2d2e] rounded-lg w-full px-3 py-2.5 text-white/90 focus:outline-none focus:border-[#760940] text-sm" />
+                                <input onChange={handleChange} name='message' value={paymentform.message} type="text" placeholder="Enter Message" className="bg-[#1f1f1f] border border-[#2e2d2e] rounded-lg w-full px-3 py-2.5 text-white/90 focus:outline-none focus:border-[#760940] text-sm" />
+                                <input onChange={handleChange} name='amount' value={paymentform.amount} type="number" placeholder="Enter Amount (₹)" className="bg-[#1f1f1f] border border-[#2e2d2e] rounded-lg w-full px-3 py-2.5 text-white/90 focus:outline-none focus:border-[#760940] text-sm" />
                                 <button onClick={() => {
                                     pay(Number(paymentform.amount) * 100)
-                                }} className="bg-[#760940] text-white px-51 py-2 rounded-lg hover:bg-[#762045] transition-all cursor-pointer">Pay</button>
+                                }} className="bg-[#760940] text-white w-full py-2.5 rounded-lg hover:bg-[#762045] font-semibold transition-all cursor-pointer mt-1">Pay</button>
                             </div>
-                            <div className="pills flex gap-2 mt-5">
+                            <div className="pills flex flex-wrap gap-2 mt-4 justify-center">
                                 <div onClick={() => {
                                     pay(500)
                                 }
-                                } className="px-2 py-1.5  rounded-xl  border border-[#2e2d2e] overflow-hidden hover:bg-[#762045] cursor-pointer">pay ₹5 </div>
+                                } className="px-3 py-1.5 text-xs sm:text-sm rounded-xl border border-[#2e2d2e] hover:bg-[#762045] cursor-pointer transition-all">pay ₹5 </div>
                                 <div onClick={() => {
                                     pay(1000)
                                 }
-                                } className="px-2 py-1.5  rounded-xl border border-[#2e2d2e] overflow-hidden hover:bg-[#762045] cursor-pointer">pay ₹10 </div>
+                                } className="px-3 py-1.5 text-xs sm:text-sm rounded-xl border border-[#2e2d2e] hover:bg-[#762045] cursor-pointer transition-all">pay ₹10 </div>
                                 <div onClick={() => {
                                     pay(2500)
                                 }
-                                } className="px-2 py-1.5  rounded-xl border border-[#2e2d2e] overflow-hidden hover:bg-[#762045] cursor-pointer">pay ₹25 </div>
+                                } className="px-3 py-1.5 text-xs sm:text-sm rounded-xl border border-[#2e2d2e] hover:bg-[#762045] cursor-pointer transition-all">pay ₹25 </div>
                                 <div onClick={() => {
                                     pay(5000)
                                 }
-                                } className="px-2 py-1.5  rounded-xl border border-[#2e2d2e] overflow-hidden hover:bg-[#762045] cursor-pointer">pay ₹50 </div>
+                                } className="px-3 py-1.5 text-xs sm:text-sm rounded-xl border border-[#2e2d2e] hover:bg-[#762045] cursor-pointer transition-all">pay ₹50 </div>
                             </div>
                         </div>
                     </div>
-
 
                 </div>
             </div>
