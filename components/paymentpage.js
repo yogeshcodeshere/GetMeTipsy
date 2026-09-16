@@ -42,25 +42,33 @@ const PaymentPage = ({ username }) => {
 
         let a = await intiate(amount, username, paymentform)
         let o_id = a.id
+        const razorKey = a?.key || currentuser?.razorkey;
+        if (!razorKey) {
+            alert("Razorpay Key is missing! Please make sure KEY_ID is set in environment variables or enter your keys in Dashboard.");
+            return;
+        }
+
+        const callbackUrl = typeof window !== "undefined" && window.location.origin
+            ? `${window.location.origin}/api/razorpay`
+            : `${process.env.NEXT_PUBLIC_URL}/api/razorpay`;
+
         let options = {
-            "key": currentuser.razorkey, // Enter the Key ID generated from the Dashboard
+            "key": razorKey,
             "amount": amount, // Amount is in currency subunits. 
             "currency": "INR",
             "name": "GetMeTipsy", //your business name
-            "description": "Test Transaction",
-            "image": "https://example.com/your_logo",
+            "description": `Tip to ${username}`,
+            "image": currentuser?.profilepic || "/logo.png",
             "order_id": o_id, // This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-            "callback_url": `${process.env.NEXT_PUBLIC_URL}/api/razorpay`, //your callback url
-            "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
-                "name": "Gaurav Kumar", //your customer's name
-                "email": "gaurav.kumar@example.com",
-                "contact": "+919876543210" //Provide the customer's phone number for better conversion rates 
+            "callback_url": callbackUrl,
+            "prefill": {
+                "name": paymentform.name || "Supporter",
             },
             "notes": {
-                "address": "Razorpay Corporate Office"
+                "to_user": username
             },
             "theme": {
-                "color": "#3399cc"
+                "color": "#760940"
             }
         }
         let rzp1 = new window.Razorpay(options);

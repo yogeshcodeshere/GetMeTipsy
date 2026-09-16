@@ -15,13 +15,17 @@ export const POST = async (req) => {
         if(!p){
             return NextResponse.json({success: false, message: "Order id not found in the server"});
         }
-        //verify the payment
 
-        let xx = validatePaymentVerification({"order_id": body.razorpay_order_id, "payment_id": body.razorpay_payment_id}, body.razorpay_signature, process.env.KEY_SECRET);
+        let userDoc = await connectDB().then(() => import("@/models/user").then(m => m.default.findOne({ username: p.to_user })));
+        const secret = userDoc?.rs || process.env.KEY_SECRET;
+
+        //verify the payment
+        let xx = validatePaymentVerification({"order_id": body.razorpay_order_id, "payment_id": body.razorpay_payment_id}, body.razorpay_signature, secret);
 
         if(xx){
             const paymentupdate = await payment.findOneAndUpdate({o_id: body.razorpay_order_id}, {done:true}, {new:true});
-            return NextResponse.redirect(`${process.env.NEXT_PUBLIC_URL}/${paymentupdate.to_user}?paymentdone=true`);
+            const redirectBase = process.env.NEXT_PUBLIC_URL || "";
+            return NextResponse.redirect(`${redirectBase}/${paymentupdate.to_user}?paymentdone=true`);
         }
         else{
             return NextResponse.json({success: false, message: "Payment verification failed"});

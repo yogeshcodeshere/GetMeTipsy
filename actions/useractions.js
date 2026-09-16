@@ -6,13 +6,17 @@ import user from "@/models/user"
 
 export const intiate = async (amount, to_user, payment_form) => {
     await connectDB()
-    var instance = new Razorpay({ key_id: process.env.KEY_ID, key_secret: process.env.KEY_SECRET })
+    let u = await user.findOne({ username: to_user });
+    const key_id = u?.razorkey || process.env.KEY_ID;
+    const key_secret = u?.rs || process.env.KEY_SECRET;
+
+    var instance = new Razorpay({ key_id, key_secret })
 
     let options = {
         amount: Number.parseInt(amount),
         currency: "INR",
-
     }
+
 
     let x = await instance.orders.create(options)
 
@@ -25,8 +29,7 @@ export const intiate = async (amount, to_user, payment_form) => {
         message: payment_form.message,
     })
 
-    return x;
-
+    return { ...x, key: key_id };
 }
 
 export const fetchuser = async (username) => {
