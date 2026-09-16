@@ -4,9 +4,11 @@ import Script from "next/script";
 import PaymentPage from "@/components/paymentpage";
 import Link from "next/link";
 
-export default async function Username({ params }) {
+export default async function Username({ params, searchParams }) {
     const session = await getServerSession(authOptions);
     const { username } = await params;
+    const resolvedSearchParams = await searchParams;
+    const paymentdone = resolvedSearchParams?.paymentdone === "true";
 
     if (!session) {
         return (
@@ -40,7 +42,7 @@ export default async function Username({ params }) {
 
     return (
         <>
-            <PaymentPage username={username} />
+            <PaymentPage username={username} paymentdone={paymentdone} />
             <Script src="https://cdn.lordicon.com/lordicon.js" strategy="afterInteractive"></Script>
         </>
     );

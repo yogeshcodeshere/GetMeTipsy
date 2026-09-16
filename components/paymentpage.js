@@ -1,12 +1,11 @@
 "use client"
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Script from 'next/script'
-import { intiate } from '@/actions/useractions'
-import { useState, useEffect } from 'react'
-import { fetchuser, fetchuserpayments } from '@/actions/useractions'
+import { useRouter } from 'next/navigation'
+import { intiate, fetchuser, fetchuserpayments } from '@/actions/useractions'
 
-const PaymentPage = ({ username }) => {
-    // const { data: Session } = useSession()
+const PaymentPage = ({ username, paymentdone }) => {
+    const router = useRouter()
     const [paymentform, setPaymentform] = useState({
         name: "",
         message: "",
@@ -18,8 +17,8 @@ const PaymentPage = ({ username }) => {
         username: "",
     })
 
-
     const [payments, setpayments] = useState([])
+    const [showThanksModal, setShowThanksModal] = useState(false)
 
     const handleChange = (e) => {
         setPaymentform({ ...paymentform, [e.target.name]: e.target.value })
@@ -27,7 +26,16 @@ const PaymentPage = ({ username }) => {
 
     useEffect(() => {
         getData();
-    }, [])
+        if (paymentdone) {
+            setShowThanksModal(true);
+        }
+    }, [paymentdone])
+
+    const handleCloseThanks = () => {
+        setShowThanksModal(false);
+        router.replace(`/${username}`);
+    }
+
 
     const getData = async (params) => {
         let u = await fetchuser(username);
@@ -160,6 +168,33 @@ const PaymentPage = ({ username }) => {
 
                 </div>
             </div>
+
+            {showThanksModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md px-4">
+                    <div className="bg-[#141416] border border-[#760940] p-8 rounded-2xl max-w-md w-full text-center shadow-[0_0_50px_rgba(118,9,64,0.4)] flex flex-col items-center gap-5">
+                        <div className="w-20 h-20 rounded-full bg-[#760940]/25 border-2 border-[#ff4081] flex items-center justify-center text-4xl shadow-[0_0_20px_rgba(255,64,129,0.5)]">
+                            🎉
+                        </div>
+                        <div>
+                            <h2 className="text-3xl font-extrabold text-white">
+                                Thank You!
+                            </h2>
+                            <p className="text-white/80 text-base mt-2">
+                                Your donation to <span className="text-[#ff4081] font-bold">@{username}</span> was successful!
+                            </p>
+                            <p className="text-white/50 text-xs mt-1">
+                                Your support helps keep the creativity alive. 🥂
+                            </p>
+                        </div>
+                        <button
+                            onClick={handleCloseThanks}
+                            className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-[#760940] to-[#a8135c] hover:from-[#8f0c4e] hover:to-[#bd186a] text-white font-semibold transition-all shadow-lg cursor-pointer"
+                        >
+                            Back to @{username}&apos;s Page
+                        </button>
+                    </div>
+                </div>
+            )}
         </>
     )
 }
