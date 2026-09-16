@@ -25,8 +25,14 @@ const Dashboard = () => {
 
   const getData = async () => {
     let u = await fetchuser(session.user.name);
-    setForm(u);
+    if (u) {
+      setForm({
+        ...u,
+        profilepic: u.profilepic || "/default-avatar.svg",
+        coverpic: u.coverpic || "/default-cover.svg",
+      });
     }
+  }
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

@@ -45,7 +45,7 @@ const Navbar = () => {
                             id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" className="transition-all rounded-lg inline-flex items-center justify-center text-white box-border border border-transparent hover:bg-brand-strong shadow-xs font-medium leading-5 rounded-base text-sm px-2 py-2.5 hover:bg-[#302f2f6f] cursor-pointer gap-2 " type="button">
                             <div className="w-[30px] h-[30px] rounded-full overflow-hidden shrink-0 ring-[#760940] ring-3">
                                 <img
-                                    src={currentuser?.profilepic || session.user.image}
+                                    src={currentuser?.profilepic || session?.user?.image || "/default-avatar.svg"}
                                     width={30}
                                     height={30}
                                     alt="Profile"

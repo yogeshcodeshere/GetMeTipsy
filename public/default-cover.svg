@@ -1,0 +1,35 @@
+<svg width="1440" height="480" viewBox="0 0 1440 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="coverBg" x1="0" y1="0" x2="1440" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0a0a0c"/>
+      <stop offset="45%" stop-color="#210512"/>
+      <stop offset="75%" stop-color="#3d0720"/>
+      <stop offset="100%" stop-color="#120309"/>
+    </linearGradient>
+    <radialGradient id="meshGlow1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(360 180) rotate(25) scale(500 350)">
+      <stop offset="0%" stop-color="#760940" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#760940" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="meshGlow2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1080 280) rotate(-15) scale(600 400)">
+      <stop offset="0%" stop-color="#9e1c59" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#9e1c59" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dotGrid" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#ffffff" fill-opacity="0.08"/>
+    </pattern>
+  </defs>
+
+  <!-- Base Gradient -->
+  <rect width="1440" height="480" fill="url(#coverBg)"/>
+
+  <!-- Ambient Glows -->
+  <rect width="1440" height="480" fill="url(#meshGlow1)"/>
+  <rect width="1440" height="480" fill="url(#meshGlow2)"/>
+
+  <!-- Subtle Dot Grid Overlay -->
+  <rect width="1440" height="480" fill="url(#dotGrid)"/>
+
+  <!-- Subtle abstract glowing wave lines -->
+  <path d="M-100 380 Q 360 220, 720 340 T 1540 260" stroke="#760940" stroke-width="2" stroke-opacity="0.3" fill="none"/>
+  <path d="M-100 420 Q 360 260, 720 380 T 1540 300" stroke="#ff4081" stroke-width="1.5" stroke-opacity="0.15" fill="none"/>
+</svg>

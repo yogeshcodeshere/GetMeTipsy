@@ -73,10 +73,10 @@ const PaymentPage = ({ username }) => {
             <div className="min-h-screen">
 
                 <div className="banner w-full relative">
-                    <img className="opacity-70 object-cover w-full h-90 border-b border-white/40" src={currentuser.coverpic} alt="" />
+                    <img className="opacity-70 object-cover w-full h-90 border-b border-white/40" src={currentuser?.coverpic || "/default-cover.svg"} alt="" />
                     <div className="absolute top-70 left-1/2 -translate-x-1/2 w-[150px] h-[150px] rounded-full overflow-hidden border-4 border-white">
                         <img
-                            src={currentuser.profilepic}
+                            src={currentuser?.profilepic || "/default-avatar.svg"}
                             alt="Profile"
                             className="w-full h-full object-cover"
                         />

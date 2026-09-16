@@ -1,20 +1,38 @@
 import mongoose from "mongoose";
 
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/getmetipsy";
+
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
 const connectDB = async () => {
-  if (mongoose.connection.readyState >= 1) {
-    return;
+  if (cached.conn) {
+    return cached.conn;
+  }
+
+  if (!cached.promise) {
+    const opts = {
+      bufferCommands: false,
+    };
+
+    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongooseInstance) => {
+      console.log(`MongoDB Connected: ${mongooseInstance.connection.host}`);
+      return mongooseInstance;
+    });
   }
 
   try {
-    const conn = await mongoose.connect(
-      "mongodb://localhost:27017/getmetipsy"
-    );
-
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
+    cached.conn = await cached.promise;
   } catch (error) {
-    console.error(error);
+    cached.promise = null;
+    console.error("MongoDB Connection Error:", error);
     throw error;
   }
+
+  return cached.conn;
 };
 
-export default connectDB;
+export default connectDB;

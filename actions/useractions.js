@@ -39,6 +39,8 @@ export const fetchuser = async (username) => {
     return {
         ...u,
         _id: u._id.toString(),
+        profilepic: u.profilepic || "/default-avatar.svg",
+        coverpic: u.coverpic || "/default-cover.svg",
     };
 };
 
